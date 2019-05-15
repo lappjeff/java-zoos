@@ -1,5 +1,10 @@
 package zoos.zoos.repo;
 
-public interface AnimalRepository
+import org.springframework.data.repository.CrudRepository;
+import zoos.zoos.model.Zoo;
+
+public interface AnimalRepository extends CrudRepository<Zoo, Long>
 {
+	Zoo findByZooname(String name);
+
 }
