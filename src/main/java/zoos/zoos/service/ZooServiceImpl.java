@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import zoos.zoos.model.Zoo;
 import zoos.zoos.repo.ZooRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 
 @Transactional
@@ -25,9 +26,16 @@ public class ZooServiceImpl implements ZooService
 	}
 
 	@Override
-	public Zoo findZooByname(String name)
+	public Zoo findZooByname(String name) throws EntityNotFoundException
 	{
-		return null;
+		Zoo zoo = zoorepos.findByZooname(name);
+
+		if(zoo == null)
+		{
+			throw new EntityNotFoundException("Zoo " + name + " not found");
+		}
+
+		return zoo;
 	}
 
 	@Override

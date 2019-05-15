@@ -5,4 +5,5 @@ import zoos.zoos.model.Zoo;
 
 public interface ZooRepository extends CrudRepository<Zoo, Long>
 {
+	Zoo findByZooname(String zooName);
 }
