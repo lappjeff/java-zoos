@@ -1,5 +1,5 @@
 package zoos.zoos.repo;
 
-public class AnimalRepository
+public interface AnimalRepository
 {
 }
