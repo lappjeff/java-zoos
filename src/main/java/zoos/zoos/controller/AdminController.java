@@ -1,5 +1,7 @@
 package zoos.zoos.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,12 +22,16 @@ public class AdminController
 	@Autowired
 	private ZooService zooService;
 
+	private static Logger logger = LoggerFactory.getLogger(Zoo.class);
+
 	//localhost:2018/admin/zoos/zooid
 	@PutMapping(value = "/zoos/{zooid}", consumes = {"application/json"})
 	public ResponseEntity<?> updateZoo(@RequestBody
 											   Zoo updateZoo, @PathVariable long zooid)
 	{
 		zooService.update(updateZoo, zooid);
+
+		logger.info("Zoo with id " + zooid + " updated.");
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
@@ -40,6 +46,7 @@ public class AdminController
 				buildAndExpand(newZoo.getZooname()).toUri();
 		responseHeaders.setLocation(newZooURI);
 
+		logger.info("New Zoo " + newZoo.getZooname() + " created");
 		return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
 	}
 	//localhost:2018/admin/zoos/{id}
@@ -47,6 +54,8 @@ public class AdminController
 	public ResponseEntity<?> deleteZooById(@PathVariable long zooid)
 	{
 		zooService.delete(zooid);
+
+		logger.info("Zoo with id " + zooid + " deleted");
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
