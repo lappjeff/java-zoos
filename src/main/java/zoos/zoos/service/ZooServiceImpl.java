@@ -3,6 +3,7 @@ package zoos.zoos.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import zoos.zoos.model.Animal;
 import zoos.zoos.model.Zoo;
 import zoos.zoos.repo.ZooRepository;
 
@@ -47,7 +48,22 @@ public class ZooServiceImpl implements ZooService
 	@Override
 	public Zoo update(Zoo zoo, long id)
 	{
-		return null;
+		Zoo currentZoo = zoorepos.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+		if (zoo.getZooname() != null)
+		{
+			currentZoo.setZooname(zoo.getZooname());
+		}
+
+		if (zoo.getAnimals().size() > 0)
+		{
+			for (Animal a : zoo.getAnimals())
+			{
+				currentZoo.getAnimals().add(new Animal(a.getAnimaltype()));
+			}
+		}
+
+		return zoorepos.save(currentZoo);
 	}
 
 	@Override
