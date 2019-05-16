@@ -6,6 +6,7 @@ import zoos.zoos.model.Animal;
 import zoos.zoos.repo.AnimalRepository;
 import zoos.zoos.view.CountZoosWithAnimals;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 
 @Service
@@ -23,9 +24,16 @@ public class AnimalServiceImpl implements AnimalService
 	}
 
 	@Override
-	public Animal findAnimalByName(String name)
+	public ArrayList<Animal> findAnimalByName(String name) throws EntityNotFoundException
 	{
-		return null;
+		ArrayList<Animal> animals = animalRepository.getAnimalByAnimaltype(name);
+
+		if (animals.size() == 0)
+		{
+			throw new EntityNotFoundException("Animal " + name + " not found");
+		}
+
+		return animals;
 	}
 
 	@Override

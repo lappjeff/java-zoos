@@ -9,7 +9,7 @@ public interface AnimalService
 {
 	ArrayList<Animal> findAll();
 
-	Animal findAnimalByName(String name);
+	ArrayList<Animal> findAnimalByName(String name);
 
 	ArrayList<CountZoosWithAnimals> getCountZoosWithAnimals();
 }
