@@ -11,6 +11,7 @@ import zoos.zoos.model.UserRoles;
 import zoos.zoos.repo.RoleRepository;
 import zoos.zoos.repo.UserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service(value = "userService")
@@ -36,7 +37,9 @@ public class UserServiceImpl implements UserDetailsService, UserService
 	@Override
 	public List<User> findAll()
 	{
-		return null;
+		ArrayList<User> users = new ArrayList<>();
+		userRepos.findAll().iterator().forEachRemaining(users::add);
+		return users;
 	}
 
 	@Override

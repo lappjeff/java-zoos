@@ -27,7 +27,7 @@ public class UserController
 		return new ResponseEntity<>(null, HttpStatus.CREATED);
 	}
 
-	//localhost:2019/users/viewall
+	//localhost:2018/users/viewall
 	@GetMapping(value = "/viewall", produces = {"application/json"})
 	public ResponseEntity<?> listAllUsers()
 	{
