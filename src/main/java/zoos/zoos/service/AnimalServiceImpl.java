@@ -39,6 +39,6 @@ public class AnimalServiceImpl implements AnimalService
 	@Override
 	public ArrayList<CountZoosWithAnimals> getCountZoosWithAnimals()
 	{
-		return null;
+		return animalRepository.getCountZoosWithAnimals();
 	}
 }

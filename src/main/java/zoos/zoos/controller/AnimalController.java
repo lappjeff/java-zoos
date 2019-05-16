@@ -30,4 +30,11 @@ public class AnimalController
 	{
 		return new ResponseEntity<>(animalService.findAnimalByName(type), HttpStatus.OK);
 	}
+
+	//localhost:2018/animals/count
+	@GetMapping(value = "/count", produces = {"application/json"})
+	public ResponseEntity<?> getCountAnimalsInZoos()
+	{
+		return new ResponseEntity<>(animalService.getCountZoosWithAnimals(), HttpStatus.OK);
+	}
 }
