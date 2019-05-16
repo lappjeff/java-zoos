@@ -24,7 +24,7 @@ public class User extends Auditable
 	@Column(nullable = false)
 	private String password;
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnoreProperties({"role", "user"})
 	private List<UserRoles> userRoles = new ArrayList<>();
 

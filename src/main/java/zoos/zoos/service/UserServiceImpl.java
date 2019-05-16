@@ -11,9 +11,11 @@ import zoos.zoos.model.UserRoles;
 import zoos.zoos.repo.RoleRepository;
 import zoos.zoos.repo.UserRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Transactional
 @Service(value = "userService")
 public class UserServiceImpl implements UserDetailsService, UserService
 {
@@ -48,10 +50,17 @@ public class UserServiceImpl implements UserDetailsService, UserService
 		return null;
 	}
 
+	@Transactional
 	@Override
-	public void delete(long id)
+	public void delete(long userid)
 	{
-
+		if (userRepos.findById(userid).isPresent())
+		{
+			userRepos.deleteUserRole(userid);
+			userRepos.deleteById(userid);
+		} else {
+			throw new EntityNotFoundException(Long.toString(userid));
+		}
 	}
 
 	@Override

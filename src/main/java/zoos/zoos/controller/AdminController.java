@@ -49,6 +49,7 @@ public class AdminController
 		logger.info("New Zoo " + newZoo.getZooname() + " created");
 		return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
 	}
+
 	//localhost:2018/admin/zoos/{id}
 	@DeleteMapping(value = "/zoos/{zooid}")
 	public ResponseEntity<?> deleteZooById(@PathVariable long zooid)
